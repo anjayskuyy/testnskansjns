@@ -2381,14 +2381,15 @@ button, [onclick], .nav-item, .bk-row, .stat-card, .slot-tag, .day-toggle,
   import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
   window.__firebaseReady = false;
   // ─── GANTI DENGAN KONFIGURASI FIREBASE KAMU ───────────────────────────────
-  const firebaseConfig = {
-    apiKey:            "GANTI_API_KEY",
-    authDomain:        "GANTI_PROJECT_ID.firebaseapp.com",
-    projectId:         "GANTI_PROJECT_ID",
-    storageBucket:     "GANTI_PROJECT_ID.appspot.com",
-    messagingSenderId: "GANTI_SENDER_ID",
-    appId:             "GANTI_APP_ID"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBJc7kRbWO6pSVIkZVWH7DABShCqVfmVHE",
+  authDomain: "jessicabeautymassage.firebaseapp.com",
+  projectId: "jessicabeautymassage",
+  storageBucket: "jessicabeautymassage.firebasestorage.app",
+  messagingSenderId: "222841910956",
+  appId: "1:222841910956:web:540f44a96f5c3f7fc3d109",
+  measurementId: "G-C8E191E8R0"
+};
   // ──────────────────────────────────────────────────────────────────────────
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
