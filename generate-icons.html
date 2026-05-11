@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JBM Icon Generator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0907;
+    color: #e8d5a3;
+    font-family: Georgia, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 36px;
+    padding: 48px 24px;
+  }
+  h2 { font-size: .9rem; font-weight: 400; letter-spacing: .25em; color: #c8aa64; text-transform: uppercase; }
+  .subtitle { font-size: .72rem; color: #6a5a40; letter-spacing: .08em; }
+  .icons-row { display: flex; gap: 48px; flex-wrap: wrap; justify-content: center; align-items: flex-end; }
+  .icon-box { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .icon-box canvas { border-radius: var(--r); display: block; cursor: pointer; transition: transform .2s; }
+  .icon-box canvas:hover { transform: scale(1.04); }
+  .icon-label { font-size: .68rem; color: #6a5a40; letter-spacing: .12em; text-transform: uppercase; text-align: center; line-height: 1.6; }
+  .hint {
+    font-size: .75rem; color: #8a7050; text-align: center; line-height: 1.9;
+    border: 1px solid #c8aa6430; padding: 18px 28px; max-width: 380px;
+  }
+  .hint strong { color: #c8aa64; font-weight: 400; }
+  .step { display: inline-block; width: 18px; height: 18px; border: 1px solid #c8aa6460; border-radius: 50%; line-height: 17px; text-align: center; font-size: .65rem; color: #c8aa64; margin-right: 6px; }
+</style>
+</head>
+<body>
+
+<h2>Jessica Beauty Massage</h2>
+<p class="subtitle">PWA Application Icons</p>
+
+<div class="icons-row">
+  <div class="icon-box" style="--r:40px">
+    <canvas id="icon512" width="200" height="200"></canvas>
+    <div class="icon-label">icon-512.png<br>512 × 512 px</div>
+  </div>
+  <div class="icon-box" style="--r:22px">
+    <canvas id="icon192" width="96" height="96"></canvas>
+    <div class="icon-label">icon-192.png<br>192 × 192 px</div>
+  </div>
+  <div class="icon-box" style="--r:12px">
+    <canvas id="icon64" width="64" height="64"></canvas>
+    <div class="icon-label">Preview<br>kecil</div>
+  </div>
+</div>
+
+<div class="hint">
+  <span class="step">1</span> Klik kanan pada gambar di atas<br>
+  <span class="step">2</span> Pilih <strong>"Save image as…"</strong><br>
+  <span class="step">3</span> Simpan sebagai <strong>icon-512.png</strong> dan <strong>icon-192.png</strong><br>
+  <span class="step">4</span> Taruh di folder yang sama dengan <strong>index.html</strong>
+</div>
+
+<script>
+function draw(canvas, s) {
+  canvas.width = canvas.height = s;
+  var ctx = canvas.getContext('2d');
+  var cx = s/2, cy = s/2, oy = cy * 0.87;
+  var gold = '#c8aa64';
+
+  // Background
+  ctx.fillStyle = '#0a0907';
+  ctx.beginPath();
+  ctx.roundRect(0, 0, s, s, s*0.18);
+  ctx.fill();
+
+  // Warm glow
+  var glow = ctx.createRadialGradient(cx, oy, 0, cx, oy, s*0.52);
+  glow.addColorStop(0,   'rgba(200,170,100,0.11)');
+  glow.addColorStop(0.5, 'rgba(200,170,100,0.03)');
+  glow.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath(); ctx.roundRect(0, 0, s, s, s*0.18); ctx.fill();
+
+  // Outer border
+  ctx.strokeStyle = 'rgba(200,170,100,0.18)';
+  ctx.lineWidth = s*0.012;
+  ctx.beginPath();
+  ctx.roundRect(s*0.045, s*0.045, s*0.91, s*0.91, s*0.14);
+  ctx.stroke();
+
+  // Petals
+  function petal(angle, len, w, alpha) {
+    ctx.save();
+    ctx.translate(cx, oy);
+    ctx.rotate(angle);
+    ctx.beginPath();
+    ctx.ellipse(0, -len*0.5, w, len, 0, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(200,170,100,' + alpha + ')';
+    ctx.fill();
+    ctx.restore();
+  }
+  for (var i=0; i<8; i++) petal(Math.PI*2*i/8 + Math.PI/8, s*0.175, s*0.048, 0.18);
+  for (var i=0; i<6; i++) petal(Math.PI*2*i/6,             s*0.185, s*0.055, 0.60);
+  for (var i=0; i<6; i++) petal(Math.PI*2*i/6 + Math.PI/6, s*0.155, s*0.050, 1.00);
+
+  // Center circle
+  ctx.beginPath(); ctx.arc(cx, oy, s*0.055, 0, Math.PI*2);
+  ctx.fillStyle = gold; ctx.fill();
+  ctx.beginPath(); ctx.arc(cx, oy, s*0.022, 0, Math.PI*2);
+  ctx.fillStyle = '#0a0907'; ctx.fill();
+
+  // Decorative ring
+  ctx.beginPath(); ctx.arc(cx, oy, s*0.295, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(200,170,100,0.28)';
+  ctx.lineWidth = s*0.008; ctx.stroke();
+
+  // Diamond marks
+  for (var i=0; i<4; i++) {
+    var a = Math.PI*2*i/4 + Math.PI/4;
+    ctx.save();
+    ctx.translate(cx + Math.cos(a)*s*0.295, oy + Math.sin(a)*s*0.295);
+    ctx.rotate(a);
+    ctx.beginPath();
+    ctx.moveTo(0, -s*0.022); ctx.lineTo(s*0.012, 0);
+    ctx.lineTo(0,  s*0.022); ctx.lineTo(-s*0.012, 0);
+    ctx.closePath(); ctx.fillStyle = gold; ctx.fill();
+    ctx.restore();
+  }
+
+  // Typography
+  var ty = s * 0.815;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = '#e8d5a3';
+  ctx.font = '300 ' + (s*0.075) + 'px "Helvetica Neue",Helvetica,Arial,sans-serif';
+  ctx.letterSpacing = (s*0.018) + 'px';
+  ctx.fillText('JESSICA', cx, ty);
+
+  // Gold rule
+  var rw = s*0.28;
+  ctx.strokeStyle = 'rgba(200,170,100,0.45)';
+  ctx.lineWidth = s*0.005;
+  ctx.beginPath(); ctx.moveTo(cx-rw/2, ty+s*0.03); ctx.lineTo(cx+rw/2, ty+s*0.03); ctx.stroke();
+
+  // Subtitle
+  ctx.fillStyle = '#c8aa64';
+  ctx.font = '300 ' + (s*0.050) + 'px "Helvetica Neue",Helvetica,Arial,sans-serif';
+  ctx.letterSpacing = (s*0.010) + 'px';
+  ctx.fillText('BEAUTY MASSAGE', cx, ty + s*0.075);
+}
+
+window.onload = function() {
+  draw(document.getElementById('icon512'), 200);
+  draw(document.getElementById('icon192'), 96);
+  draw(document.getElementById('icon64'),  64);
+};
+</script>
+</body>
+</html>

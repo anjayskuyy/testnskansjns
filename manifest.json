@@ -1,0 +1,44 @@
+{
+  "name": "Jessica Beauty Massage",
+  "short_name": "JBM Booking",
+  "description": "Booking online pijat & spa premium. Pilih terapis, jadwal, dan lokasi favoritmu.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A0907",
+  "theme_color": "#0A0907",
+  "lang": "id",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["beauty", "lifestyle", "health"],
+  "shortcuts": [
+    {
+      "name": "Booking Sekarang",
+      "short_name": "Booking",
+      "description": "Langsung ke halaman booking",
+      "url": "./index.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
